@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
-import { Link, useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../LoginInfo/AuthProvider/AuthProvider';
+import UseCart from '../../Hook/UseCarts/UseCart';
 
 
 const OrderPage = () => {
 
     const order = useLoaderData()
+    const {user} = useContext(AuthContext)
+    const [cart, refetch] = UseCart()
+    const navigate = useNavigate()
+    const { name, img, price,_id } = order
 
-    const { name, img, price, _id } = order
+    const handleAddToCart = (order) => {
+        console.log(order)
+        if(user && user.email){
+            const orderItem = { name, img, price,itemId:_id,email:user.email }
+            fetch('http://localhost:5000/cart',{
+                method:'POST',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(orderItem)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.insertedId){
+                    refetch();
+                    alert('Order Confirm')
+                }
+                else{
+                    alert('Please Login to order now')
+                    navigate('/login')
+                }
+            })
+        }
+    }
 
     return (
         <div>
@@ -18,11 +47,14 @@ const OrderPage = () => {
                         <h2 className='mb-5 text-2xl'>{name}</h2>
                         <p>{price}</p>
                         <button className="btn">
-                        <FaShoppingCart/>
-                        <div className="badge badge-secondary">+99</div>
-                    </button>
+                            <FaShoppingCart />
+                            <div className="badge badge-secondary">+{cart?.length || 0} </div>
+                        </button>
                     </div>
                     <div className='divider'></div>
+                    <div className=" text-center mt-6">
+                        <button onClick={() => handleAddToCart(order)} className="btn bg-orange-400">Add To Cart</button>
+                    </div>
                 </section>
 
                 <section className='mt-8'>
@@ -50,6 +82,7 @@ const OrderPage = () => {
                             </label>
                         </div>
                         <div className='divider'></div>
+
                     </div>
                     <form>
                         <div className='md:w-72 w-80 md:ml-0 ml-6'>

@@ -26,118 +26,140 @@ import SideTable from "../Pages/Home/Home/Buttons/AllBtns/SideTable/SideTable";
 import TeaTable from "../Pages/Home/Home/Buttons/AllBtns/TeaTable/TeaTable";
 import TvStand from "../Pages/Home/Home/Buttons/AllBtns/TvStand/TvStand";
 import Office from "../Pages/Home/Home/Buttons/AllBtns/Office/Office";
+import DashBoard from "../LayOut/DashBoard";
+import MyCart from "../Pages/DashBoard/MyCart/MyCart";
+import UserHome from "../Pages/DashBoard/UserHome/UserHome";
+import ReserVation from "../Pages/DashBoard/Reservation/ReserVation";
 
 
 export const router = createBrowserRouter([
     {
-      path: "/",
-      element: <LayOut></LayOut>,
-      children:[
-        {
-            path: "/",
-            element: <Home></Home>,  
-        },
-        {
-            path: "/new",
-            element: <New></New>,  
-        },
-        {
-            path: "/bookself",
-            element: <New></New>,  
-        },
-        {
-            path: "/readingTable",
-            element: <PrivateRoute><ReadingTable></ReadingTable></PrivateRoute>,  
-        },
-        {
-            path: "/rockingChair",
-            element: <RockingChair></RockingChair>,  
-        },
-        {
-            path: "/shoeTable",
-            element: <ShoeTable></ShoeTable>,  
-        },
-        {
-            path: "/sideTable",
-            element: <SideTable></SideTable>,  
-        },
-        {
-            path: "/diningChair",
-            element: <DiningChair></DiningChair>,  
-        },
-        {
-            path: "/diningTable",
-            element: <DiningTable></DiningTable>,  
-        },
-        {
-            path: "/kitchen",
-            element: <Kitchen></Kitchen>,  
-        },
-        {
-            path: "/lamp",
-            element: <Lamp></Lamp>,  
-        },
-        {
-            path: "/living",
-            element: <Living></Living>,  
-        },
-        {
-            path: "/mirror",
-            element: <Mirror></Mirror>,  
-        },
-        {
-            path: "/office",
-            element: <Office></Office>,  
-        },
-        {
-            path: "/chair",
-            element: <Chair></Chair>,  
-        },
-        {
-            path: "/BabyTable",
-            element: <BabyTable></BabyTable>,  
-        },
-        {
-            path: "/wardrobe",
-            element: <Wardrobe></Wardrobe>,  
-        },
-        {
-            path: "/door",
-            element: <Door></Door>,  
-        },
-        {
-            path: "/dressingTable",
-            element: <DressingTable></DressingTable>,  
-        },
-        {
-            path: "/sofa",
-            element: <Sofa></Sofa>,  
-        },
-        {
-            path: "/teaTrolly",
-            element: <TeaTable></TeaTable>,  
-        },
-        {
-            path: "/tvStand",
-            element: <TvStand></TvStand>,  
-        },
-        {
-            path: "/bed",
-            element: <Bed></Bed>,  
-        },
-        {
-            path: "/login",
-            element: <Login></Login>,  
-        },
-        {
-            path: "/signUp",
-            element: <SignUp></SignUp>,  
-        },
-        {
-            path: "/orderPage/:id",
-            element: <OrderPage></OrderPage>,  
-            loader: ({params}) => fetch(`http://localhost:5000/furniture/${params.id}`)
-        },
-      ]
+        path: "/",
+        element: <LayOut></LayOut>,
+        children: [
+            {
+                path: "/",
+                element: <Home></Home>,
+            },
+            {
+                path: "/new",
+                element: <New></New>,
+            },
+            {
+                path: "/bookself",
+                element: <New></New>,
+            },
+            {
+                path: "/readingTable",
+                element: <PrivateRoute><ReadingTable></ReadingTable></PrivateRoute>,
+            },
+            {
+                path: "/rockingChair",
+                element: <RockingChair></RockingChair>,
+            },
+            {
+                path: "/shoeTable",
+                element: <ShoeTable></ShoeTable>,
+            },
+            {
+                path: "/sideTable",
+                element: <SideTable></SideTable>,
+            },
+            {
+                path: "/diningChair",
+                element: <DiningChair></DiningChair>,
+            },
+            {
+                path: "/diningTable",
+                element: <DiningTable></DiningTable>,
+            },
+            {
+                path: "/kitchen",
+                element: <Kitchen></Kitchen>,
+            },
+            {
+                path: "/lamp",
+                element: <Lamp></Lamp>,
+            },
+            {
+                path: "/living",
+                element: <Living></Living>,
+            },
+            {
+                path: "/mirror",
+                element: <Mirror></Mirror>,
+            },
+            {
+                path: "/office",
+                element: <Office></Office>,
+            },
+            {
+                path: "/chair",
+                element: <Chair></Chair>,
+            },
+            {
+                path: "/BabyTable",
+                element: <BabyTable></BabyTable>,
+            },
+            {
+                path: "/wardrobe",
+                element: <Wardrobe></Wardrobe>,
+            },
+            {
+                path: "/door",
+                element: <Door></Door>,
+            },
+            {
+                path: "/dressingTable",
+                element: <DressingTable></DressingTable>,
+            },
+            {
+                path: "/sofa",
+                element: <Sofa></Sofa>,
+            },
+            {
+                path: "/teaTrolly",
+                element: <TeaTable></TeaTable>,
+            },
+            {
+                path: "/tvStand",
+                element: <TvStand></TvStand>,
+            },
+            {
+                path: "/bed",
+                element: <Bed></Bed>,
+            },
+            {
+                path: "/login",
+                element: <Login></Login>,
+            },
+            {
+                path: "/signUp",
+                element: <SignUp></SignUp>,
+            },
+            {
+                path: "/orderPage/:id",
+                element: <OrderPage></OrderPage>,
+                loader: ({ params }) => fetch(`http://localhost:5000/furniture/${params.id}`)
+            },
+        ]
     },
-  ]);
+    {
+        path: "/dashboard",
+        element: <DashBoard></DashBoard>,
+        children:[
+            {
+                path: "mycart",
+                element: <MyCart></MyCart>,
+            },
+            {
+                path: "userHome",
+                element: <UserHome></UserHome>,
+            },
+            {
+                path: "reservation",
+                element: <ReserVation></ReserVation>,
+            },
+        ]
+    },
+]);
