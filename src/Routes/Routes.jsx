@@ -30,6 +30,7 @@ import DashBoard from "../LayOut/DashBoard";
 import MyCart from "../Pages/DashBoard/MyCart/MyCart";
 import UserHome from "../Pages/DashBoard/UserHome/UserHome";
 import ReserVation from "../Pages/DashBoard/Reservation/ReserVation";
+import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
 
 
 export const router = createBrowserRouter([
@@ -159,6 +160,10 @@ export const router = createBrowserRouter([
             {
                 path: "reservation",
                 element: <ReserVation></ReserVation>,
+            },
+            {
+                path: "allUsers",
+                element: <AllUsers></AllUsers>,
             },
         ]
     },

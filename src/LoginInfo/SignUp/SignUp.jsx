@@ -27,14 +27,9 @@ const SignUp = () => {
                     body: JSON.stringify(User)
                 })
                     .then(res => res.json())
-                    .then(data => {
-                        if (data.insertedId) {
-                            alert('Login SuccessFully')
-                            
-                        }
-
+                    .then(() => {
+                        navigate(from, { replace: true });
                     })
-
 
                 console.log(LoggedUser)
             })
@@ -55,7 +50,6 @@ const SignUp = () => {
 
         console.log(name, email, password, confirm)
         const User = { name, email }
-        navigate(from, { replace: true });
         form.reset()
         createUser(email, password)
             .then(result => {
@@ -71,7 +65,7 @@ const SignUp = () => {
                     .then(data => {
                         if (data.insertedId) {
                             alert('SignUp SuccessFully')
-                            
+                            navigate(from, { replace: true });
                         }
 
                     })

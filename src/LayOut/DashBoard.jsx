@@ -1,8 +1,10 @@
 import React from 'react';
-import { FaBackward, FaCalendarAlt, FaHome, FaShoppingCart } from 'react-icons/fa';
+import { FaBackward, FaBook, FaCalendarAlt, FaHome, FaPlus, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
 
 const DashBoard = () => {
+
+    const isAdmin = true
     return (
         <div className="drawer lg:drawer-open ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -16,12 +18,26 @@ const DashBoard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay "></label>
                 <ul className="menu p-4 w-80 min-h-full  text-white">
                     {/* Sidebar content here */}
-                    
-                    <li><Link to='userHome'> <FaHome></FaHome> User Home</Link></li>
-                    <li><Link to='reservation'> <FaCalendarAlt></FaCalendarAlt> Reservation</Link></li>
-                    <li><Link to='mycart'> <FaShoppingCart></FaShoppingCart>My Cart</Link></li>
-                    <div className='divider'></div>
-                    <li><Link to='/'> <FaBackward></FaBackward> Back to Home</Link></li>
+
+                    {
+                        isAdmin ?
+                            <>
+                                <li><Link to='userHome'> <FaHome></FaHome> Admin Home</Link></li>
+                                <li><Link to='reservation'> <FaPlus></FaPlus> Add Categories</Link></li>
+                                <li><Link to='reservation'> <FaBook></FaBook> Manage Bookings</Link></li>
+                                <li><Link to='allUsers'> <FaUser></FaUser> All Users</Link></li>
+                                <div className='divider'></div>
+                                <li><Link to='/'> <FaBackward></FaBackward> Back to Home</Link></li>
+                            </> :
+
+                            <>
+                                <li><Link to='userHome'> <FaHome></FaHome> User Home</Link></li>
+                                <li><Link to='reservation'> <FaCalendarAlt></FaCalendarAlt> Reservation</Link></li>
+                                <li><Link to='mycart'> <FaShoppingCart></FaShoppingCart>My Cart</Link></li>
+                                <div className='divider'></div>
+                                <li><Link to='/'> <FaBackward></FaBackward> Back to Home</Link></li>
+                            </>
+                    }
                 </ul>
             </div>
         </div>
