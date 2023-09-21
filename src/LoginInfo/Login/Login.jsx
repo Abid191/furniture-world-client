@@ -8,7 +8,7 @@ import { AuthContext } from '../AuthProvider/AuthProvider';
 const Login = () => {
 
 
-    const {createUser,googleLogIn,logIn,loading} = useContext(AuthContext)
+    const {googleLogIn,logIn,loading} = useContext(AuthContext)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -23,7 +23,7 @@ const Login = () => {
         googleLogIn()
         .then(result => {    
             alert('Login SuccessFully')
-
+            navigate(from, { replace: true });
                 const user = result.user
                 console.log(user)
             })
@@ -42,12 +42,12 @@ const Login = () => {
 
         console.log(email, password)
         form.reset()
-        navigate(from, { replace: true });
+        
         
         logIn(email, password)
             .then(result => {
                 alert('Login SuccessFully')
-
+                navigate(from, { replace: true });
                 const user = result.user
                 console.log(user)
             })

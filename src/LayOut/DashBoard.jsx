@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaBackward, FaBook, FaCalendarAlt, FaHome, FaPlus, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../LoginInfo/AuthProvider/AuthProvider';
+import AdminHook from '../Hook/AdminHook/AdminHook';
 
 const DashBoard = () => {
 
-    const isAdmin = true
+    const {loading } = useContext(AuthContext)
+    
+    if(loading){
+        return <progress className="progress w-56"></progress>
+    }
+    const [isAdmin] = AdminHook()
+    
+    let myAdmin = false
+     if(isAdmin?.role === 'admin'){
+        myAdmin=true
+     } 
+     else{
+        myAdmin=false
+     }
+
     return (
         <div className="drawer lg:drawer-open ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -20,10 +37,10 @@ const DashBoard = () => {
                     {/* Sidebar content here */}
 
                     {
-                        isAdmin ?
+                        myAdmin ?
                             <>
                                 <li><Link to='userHome'> <FaHome></FaHome> Admin Home</Link></li>
-                                <li><Link to='reservation'> <FaPlus></FaPlus> Add Categories</Link></li>
+                                <li><Link to='addCategory'> <FaPlus></FaPlus> Add Categories</Link></li>
                                 <li><Link to='reservation'> <FaBook></FaBook> Manage Bookings</Link></li>
                                 <li><Link to='allUsers'> <FaUser></FaUser> All Users</Link></li>
                                 <div className='divider'></div>

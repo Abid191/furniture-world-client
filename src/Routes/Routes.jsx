@@ -31,6 +31,8 @@ import MyCart from "../Pages/DashBoard/MyCart/MyCart";
 import UserHome from "../Pages/DashBoard/UserHome/UserHome";
 import ReserVation from "../Pages/DashBoard/Reservation/ReserVation";
 import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
+import AddCategory from "../Pages/DashBoard/AddCategory/AddCategory";
+import AdminRoutes from "../LoginInfo/AdminRoutes/AdminRoutes";
 
 
 export const router = createBrowserRouter([
@@ -164,6 +166,10 @@ export const router = createBrowserRouter([
             {
                 path: "allUsers",
                 element: <AllUsers></AllUsers>,
+            },
+            {
+                path: "addCategory",
+                element: <AddCategory></AddCategory> ,
             },
         ]
     },
