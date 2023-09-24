@@ -28,11 +28,12 @@ import TvStand from "../Pages/Home/Home/Buttons/AllBtns/TvStand/TvStand";
 import Office from "../Pages/Home/Home/Buttons/AllBtns/Office/Office";
 import DashBoard from "../LayOut/DashBoard";
 import MyCart from "../Pages/DashBoard/MyCart/MyCart";
-import UserHome from "../Pages/DashBoard/UserHome/UserHome";
-import ReserVation from "../Pages/DashBoard/Reservation/ReserVation";
 import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
 import AddCategory from "../Pages/DashBoard/AddCategory/AddCategory";
-import AdminRoutes from "../LoginInfo/AdminRoutes/AdminRoutes";
+import CategoryItems from "../Pages/DashBoard/CategoryItems/CategoryItems";
+import EndOption from "../Pages/Home/Home/EndOption/EndOption";
+import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
+import UserHome from "../Pages/DashBoard/UserHomee/UserHome";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
+            },
+            {
+                path: "/endOption",
+                element: <EndOption></EndOption>,
             },
             {
                 path: "/new",
@@ -152,6 +157,14 @@ export const router = createBrowserRouter([
         element: <DashBoard></DashBoard>,
         children:[
             {
+                path: "adminHome",
+                element: <AdminHome></AdminHome>,
+            },
+            {
+                path: "userHome",
+                element: <UserHome></UserHome>
+            },
+            {
                 path: "mycart",
                 element: <MyCart></MyCart>,
             },
@@ -160,8 +173,8 @@ export const router = createBrowserRouter([
                 element: <UserHome></UserHome>,
             },
             {
-                path: "reservation",
-                element: <ReserVation></ReserVation>,
+                path: "categoryItem",
+                element: <CategoryItems></CategoryItems>,
             },
             {
                 path: "allUsers",

@@ -18,27 +18,27 @@ const AddCategory = () => {
 
     const onSubmit = data => {
         const formData = new FormData()
-            formData.append('image',data.img[0])
-    
-            fetch(img_hosting_url,{
-                method:'POST',
-                body:formData
-            })
+        formData.append('image', data.img[0])
+
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
             .then(res => res.json())
-            .then(imgRes =>{
-                if(imgRes.success){
+            .then(imgRes => {
+                if (imgRes.success) {
                     const imgURL = imgRes.data.display_url
-                    const {name,category,price} = data
-                    const newItem = {name,img:imgURL,category,price}
+                    const { name, category, price } = data
+                    const newItem = { name, img: imgURL, category, price }
                     console.log(newItem)
-                    axios.post('http://localhost:5000/furniture',newItem)
-                    .then(data=>{
-                        alert('Data inserted successfully')
-                        console.log('after post new menu item',data.data)
-                    })
-                    
+                    axios.post('http://localhost:5000/furniture', newItem)
+                        .then(data => {
+                            alert('Data inserted successfully')
+                            console.log('after post new menu item', data.data)
+                        })
+
                 }
-                
+
             })
         console.log(data)
     };
@@ -48,8 +48,9 @@ const AddCategory = () => {
     console.log(img_hosting_token)
     return (
         <div>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 bg-orange-400 p-10 rounded font-semibold">
+            <div className='uppercase text-center font-semibold text-2xl mt-10' ><h2>Add Category</h2></div>
+            <div className="divider"></div>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 bg-gray-300 p-10 rounded font-semibold mt-10">
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Product name*</span>

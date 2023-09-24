@@ -2,7 +2,7 @@ import React from 'react';
 import UseCart from '../../../Hook/UseCarts/UseCart';
 
 const MyCart = () => {
-    const [cart,refetch] = UseCart()
+    const [cart,refetch] = UseCart() 
     const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0)
 
     const handleDelete = row => {
@@ -41,9 +41,8 @@ const MyCart = () => {
                     </thead>
                     <tbody>
                         {
-                            cart.map((row, index) => <tr
-                                key={row._id}
-                            >
+                            cart.map((row, index)=><tr 
+                                key={row._id} >
                                 <td>
                                     {index + 1}
                                 </td>
@@ -54,14 +53,23 @@ const MyCart = () => {
                                                 <img src={row.img} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
-                                        <div>
-                                            <div className="font-bold">Hart Hagerty</div>
-                                            <div className="text-sm opacity-50">United States</div>
-                                        </div>
+                                        
                                     </div>
                                 </td>
                                 <td>
                                     {row.name}
+                                </td>
+                                <td>
+                                    {row.person}
+                                </td>
+                                <td>
+                                    {row.payment}
+                                </td>
+                                <td>
+                                    {row.mobile}
+                                </td>
+                                <td>
+                                    {row.address}
                                 </td>
                                 <td>{row.price}</td>
                                 <td>

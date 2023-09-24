@@ -8,33 +8,33 @@ import UseCart from '../../Hook/UseCarts/UseCart';
 const OrderPage = () => {
 
     const order = useLoaderData()
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [cart, refetch] = UseCart()
     const navigate = useNavigate()
-    const { name, img, price,_id } = order
+    const { name, img, price, _id } = order
 
     const handleAddToCart = (order) => {
         console.log(order)
-        if(user && user.email){
-            const orderItem = { name, img, price,itemId:_id,email:user.email }
-            fetch('http://localhost:5000/cart',{
-                method:'POST',
-                headers:{
-                    'content-type':'application/json'
+        if (user && user.email) {
+            const orderItem = { name, img, price, itemId: _id, email: user.email }
+            fetch('http://localhost:5000/cart', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
                 },
-                body:JSON.stringify(orderItem)
+                body: JSON.stringify(orderItem)
             })
-            .then(res=>res.json())
-            .then(data=>{
-                if(data.insertedId){
-                    refetch();
-                    alert('Order Confirm')
-                }
-                else{
-                    alert('Please Login to order now')
-                    navigate('/login')
-                }
-            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        refetch();
+                        alert('Order Confirm')
+                    }
+                    else {
+                        alert('Please Login to order now')
+                        navigate('/login')
+                    }
+                })
         }
     }
 
@@ -88,14 +88,9 @@ const OrderPage = () => {
                         <div className='md:w-72 w-80 md:ml-0 ml-6'>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Name</span>
+                                    <span className="label-text">your Name</span>
                                 </label>
-                                <input type="text" name='name' required placeholder="text your name" className="input input-bordered" />
-                                <label className="label">
-
-                                    <span className="label-text">Order Name</span>
-                                </label>
-                                <input type="text" name='order' required placeholder="write order name" className="input input-bordered" />
+                                <input type="text" name='person' required placeholder="text your name" className="input input-bordered" />
 
                                 <label className="label">
                                     <span className="label-text">Payment Name</span>
@@ -110,10 +105,10 @@ const OrderPage = () => {
                                 <label className="label">
                                     <span className="label-text">Address</span>
                                 </label>
-                                <input type="text" name='Address' required placeholder=" Write your address" className="input input-bordered" />
+                                <input type="text" name='address' required placeholder=" Write your address" className="input input-bordered" />
 
                                 <div className="form-control mt-6">
-                                    <button className="btn bg-orange-400">Submit</button>
+                                    <button className="btn bg-orange-400">Buy Now</button>
                                 </div>
 
                             </div>

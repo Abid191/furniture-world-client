@@ -2,8 +2,18 @@ import React, { useContext } from 'react';
 import { FaBeer, FaFacebook, FaInstagram, FaPhone, FaShoppingCart, FaTelegram, FaTwitter } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../LoginInfo/AuthProvider/AuthProvider';
+import AdminHook from '../../Hook/AdminHook/AdminHook';
 
 const Navbar = () => {
+
+    const [isAdmin] = AdminHook()
+    let myAdmin = false
+    if (isAdmin?.role === 'admin') {
+        myAdmin = true
+    }
+    else {
+        myAdmin = false
+    }
 
     const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
@@ -22,7 +32,9 @@ const Navbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[2] p-4 gap-y-2 shadow bg-base-100 rounded-box w-52">
-                            <Link to="" className='hover:text-orange-600'> New </Link>
+                            {
+                                myAdmin ? <Link to="/dashboard/adminHome" className='hover:text-orange-600 font-bold'> Dashboard </Link> : <Link to="/dashboard/UserHome" className='hover:text-orange-600 font-bold'> Dashboard </Link>
+                            }
                             <Link to="" className='hover:text-orange-600'> Living </Link>
                             <Link to="" className='hover:text-orange-600'> Bedroom </Link>
                             <Link to="" className='hover:text-orange-600'> Dining </Link>
@@ -33,6 +45,7 @@ const Navbar = () => {
                             <Link to="" className='hover:text-orange-600'> Door</Link>
                             <Link to="" className='hover:text-orange-600'> Interior </Link>
                             <Link to="" className='hover:text-orange-600'> Office </Link>
+
                         </ul>
                     </div>
                     <div className='navbar-center  lg:flex hidden'>
@@ -76,13 +89,14 @@ const Navbar = () => {
                             </button>
                         </div>
                     </div>
+
                     <div className=' font-bold'>
 
                         {user?.email ? <>
 
                             <li><button onClick={handleLogOut} className='btn btn-active btn-neutral'>Log out</button></li>
                         </> :
-                            <Link to="login"> <button className='btn btn-active btn-neutral'>Login</button> </Link>
+                            <Link to="login"> <button className='btn btn-sm btn-active btn-neutral'>Login</button> </Link>
                         }
                     </div>
                 </div>
@@ -95,8 +109,10 @@ const Navbar = () => {
 
             <div className=''>
                 <div className='md:w-9/12 mx-auto hidden md:block'>
-                    <div className='flex md:gap-12 bg-white p-3'>
-                        <Link to="new" className='hover:text-orange-600'> New </Link>
+                    <div className='flex md:gap-10 bg-white p-3'>
+                        {
+                            myAdmin ? <Link to="/dashboard/adminHome" className='hover:text-orange-600 font-bold'> Dashboard </Link> : <Link to="/dashboard/UserHome" className='hover:text-orange-600 font-bold'> Dashboard </Link>
+                        }
                         <Link to="readingTable" className='hover:text-orange-600'> Reading  Table </Link>
                         <Link to="diningChair" className='hover:text-orange-600'> Dining  Chair </Link>
                         <Link to="diningTable" className='hover:text-orange-600'> Dining  Table </Link>
